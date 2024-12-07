@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {JsonPipe} from "@angular/common";
+import {TareaService} from "../../servicios";
 
 @Component({
   selector: 'app-formulario-tarea',
@@ -18,7 +19,11 @@ export class FormularioTareaComponent {
   @Output("outTarea") outTarea: EventEmitter<Tarea> = new EventEmitter<Tarea>()
   tarea: Tarea = new Tarea(0, '', false);
 
-  guardarTarea() {
+  constructor(public svrTarea: TareaService) {
+  }
+
+  async guardarTarea() {
+    await this.svrTarea.crearTarea(this.tarea);
     this.outTarea.emit(this.tarea);
   }
 

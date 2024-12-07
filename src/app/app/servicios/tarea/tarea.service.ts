@@ -22,4 +22,12 @@ export class TareaService {
     return await lastValueFrom(this.http.put<Tarea>(this.apiUrl, tarea));
   }
 
+  async crearTarea(tarea: Omit<Tarea, 'id'>): Promise<Tarea> {
+    return await lastValueFrom(this.http.post<Tarea>(this.apiUrl, tarea));
+  }
+  async eliminarTarea(id: number): Promise<{ mensaje: string }> {
+    const url = `${this.apiUrl}?id=${id}`;
+    return await lastValueFrom(this.http.delete<{ mensaje: string }>(url));
+  }
+
 }

@@ -50,7 +50,8 @@ export class GridPantallaComponent implements OnInit {
     this.svrTarea.actualizarTarea(tarea);
   }
 
-  borrarTarea(element: Tarea) {
-    this.lstTareas = this.lstTareas.filter(t => t.id !== element.id);
+  async borrarTarea(element: Tarea) {
+    await this.svrTarea.eliminarTarea(element.id)
+    this.cargarLista();
   }
 }
