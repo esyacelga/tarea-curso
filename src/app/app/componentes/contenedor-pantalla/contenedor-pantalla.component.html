@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-content>
+    @if (comportarmiento == 'FORMULARIO') {
+      <button mat-stroked-button color="primary"
+              (click)="guardarTarea(ComportamientoPantalla.GRID)"
+              matTooltip="Cancela la tarea actual">Guardar
+      </button>
+      <button mat-stroked-button color="warn"
+              (click)="setearOpcion(ComportamientoPantalla.GRID)"
+              matTooltip="Cancela la tarea actual">Cancelar
+      </button>
+
+    } @else {
+      <button mat-stroked-button color="primary"
+              (click)="setearOpcion(ComportamientoPantalla.FORMULARIO)"
+              matTooltip="Crea una nueva tarea">Nuevo
+      </button>
+    }
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>
+<mat-card>
+  <mat-card-content>
+    <app-formulario-tarea #hijo
+                          (outTarea)="cargarTarea($event)"
+                          *ngIf="comportarmiento=='FORMULARIO'"></app-formulario-tarea>
+    <app-grid-pantalla *ngIf="comportarmiento=='GRID'"
+                       [inputLstTarea]="lstTareas"
+    ></app-grid-pantalla>
+  </mat-card-content>
+</mat-card>
+
